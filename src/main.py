@@ -1,10 +1,10 @@
 from textnode import TextNode
-from textnode import TextType
+from htmlnode import HTMLNode
 
 def main():
-    node = TextNode("This is some anchor text", "link", "https://www.boot.dev")
-
-    print(node)
+    textnode = TextNode("This is some anchor text", "link", "https://www.boot.dev")
+    htmlnode = HTMLNode(value="this is a value", children="it's a boy!",)
+    print(htmlnode)
 
 if __name__ == "__main__":
     main()
