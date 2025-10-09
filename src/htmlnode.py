@@ -13,8 +13,11 @@ class HTMLNode:
         raise NotImplementedError
 
     def props_to_html(self):
+        if self.props is None:
+            return ""
+        
         prop = ' '.join(f'{k}="{html.escape(str(v), quote=True)}"' for k, v in self.props.items())
-
+        
         return f' {prop}'
     
     def __repr__(self):
@@ -26,3 +29,18 @@ class HTMLNode:
                 self.children == other.children,
                 self.props == other.props)
     
+class LeafNode(HTMLNode):
+        def __init__(self, tag, value, props=None):
+            super().__init__(tag=tag, value=value, props=props)
+
+    
+        def to_html(self):
+            if self.value is None:
+                raise ValueError("All leaf nodes must have a value")
+            
+            if self.tag is None:
+                return f"{self.value}"
+
+            else:
+                return f"<{self.tag}{self.props_to_html()}>{self.value}</{self.tag}>"
+
