@@ -44,3 +44,32 @@ class LeafNode(HTMLNode):
             else:
                 return f"<{self.tag}{self.props_to_html()}>{self.value}</{self.tag}>"
 
+class ParentNode(HTMLNode):
+    def __init__(self, tag, children, props=None):
+        super().__init__(tag=tag, children=children, props=props)
+
+    def to_html(self):
+        #value error if tag is none
+        if not self.tag or self.tag == "":
+            raise ValueError("tag cannot == None")
+        
+        #vvalue error if nildren is none
+        if self.children is None or self.children == "":
+            raise ValueError("Must have children")
+        
+        #Retrun string representing the html tag of nod and children needs to be recursive method.
+        if not self.children:
+            return f"<{self.tag}></{self.tag}>"
+        
+        child_html = ""
+
+        for child in self.children:
+            if isinstance(child, HTMLNode):
+                child_html += child.to_html() #Recursive call
+            else:
+                child_html += str(child)
+
+        return f"<{self.tag}>{child_html}</{self.tag}>"
+    
+
+
