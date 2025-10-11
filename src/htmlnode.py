@@ -57,19 +57,24 @@ class ParentNode(HTMLNode):
         if self.children is None or self.children == "":
             raise ValueError("Must have children")
         
+        #check self.children is iterable
+        try:
+            it = iter(self.children)
+        except TypeError:
+            raise TypeError("children must be iterable")
+        
         #Retrun string representing the html tag of nod and children needs to be recursive method.
         if not self.children:
             return f"<{self.tag}></{self.tag}>"
         
-        child_html = ""
+        child_html = []
 
         for child in self.children:
             if isinstance(child, HTMLNode):
-                child_html += child.to_html() #Recursive call
+                child_html.append(child.to_html()) #Recursive call
             else:
-                child_html += str(child)
+                child_html.append(str(child))
 
-        return f"<{self.tag}>{child_html}</{self.tag}>"
+        return f"<{self.tag}>{''.join(child_html)}</{self.tag}>"
     
-
-
+    
