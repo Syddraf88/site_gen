@@ -35,5 +35,3 @@ def split_nodes_delimiter(Old_nodes, delimiter, TextType):
                 within_delimiter = False
                 del_index = node_text[1:].find(delimiter)
                 
-
-"have some ideas about this one but today isn't the day. boots forgive me for cheesing the system to keep the streak up."
