@@ -35,4 +35,3 @@ def split_nodes_delimiter(Old_nodes, delimiter, TextType):
                 within_delimiter = False
                 del_index = node_text[1:].find(delimiter)
 
-asdf
